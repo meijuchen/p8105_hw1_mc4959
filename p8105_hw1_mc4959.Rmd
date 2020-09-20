@@ -53,9 +53,36 @@ as.numeric(pull(prob1_df, factor_vec)) * pull(prob1_df, samp)
 
 ## Problem 2
 
+After install the package, load the penguins dataset.
+
+```{r}
+data("penguins", package = "palmerpenguins")
+```
 
 
+Below is a short description of the penguins dataset.
 
+1. The size of the dataset: `r nrow(penguins)`  rows and  `r ncol(penguins)` columns.
+2. Three species: 'Adelie', 'Chinstrap', 'Gentoo'
+3. Three locations: 'Biscoe', 'Dream', 'Torgersen'
+4. The mean of bill length: `r mean(pull(penguins, bill_length_mm), na.rm = T)`
+5. The mean of bill depth: `r mean(pull(penguins, bill_depth_mm), na.rm = T)`
+6. The mean of flipper length: `r mean(pull(penguins, flipper_length_mm), na.rm = T)`
+
+
+This is a scatterplot of flipper_length_mm (y) vs bill_length_mm (x).
+
+```{r}
+plot_df = 
+  tibble(
+    x = pull(penguins, bill_length_mm),
+    y = pull(penguins, flipper_length_mm),
+    species = pull(penguins, species)
+  )
+
+ggplot(plot_df, aes(x = x, y = y, color = species)) + geom_point()
+ggsave("scatter_plot.pdf")
+```
 
 
 
